@@ -1,0 +1,100 @@
+﻿<br />
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- TO DO List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-tasks mr-1"></i>
+                            Tasks
+                        </h3>
+                        <div class="card-tools">
+                            <div class="btn-group btn-group-sm">
+                                <a href="/OnePercentProgress/Home/ViewProject?id=01" class="btn btn-default btn-flat" title="Back to project">
+                                    <i class="far fa-list-alt"></i>
+                                </a>
+                                <a href="/OnePercentProgress/Home/Tasks?id=01&projectId=01" class="btn btn-default btn-flat" title="Back to parent tasks">
+                                    <i class="fas fa-tasks"></i>
+                                </a>
+                                @*<button type="button" class="btn btn-default btn-flat">
+                                    <i class="fas fa-align-right"></i>
+                                    </button>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <ul class="todo-list" data-widget="todo-list">
+                            <li class="done">
+                                <!-- drag handle -->
+                                <span class="handle">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </span>
+                                <!-- todo text -->
+                                <span class="text">Design a nice theme</span>
+                                <!-- Emphasis label -->
+                                @*<small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>*@
+                                <span class="badge badge-info"><span>45%</span><span class="ml-2">160/200</span></span>
+                                <a href="/OnePercentProgress/Home/ManageTask?id=01&projectId=01" class="text-info">
+                                    <i class="fas fa-edit ml-2"></i>
+                                </a>
+                                <a href="/OnePercentProgress/Home/Tasks/?id=01&projectId=01" class="text-info">
+                                    <i class="fas fa-tasks ml-2"></i>
+                                </a>
+                                <div class="progress-group mt-1">
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-info" style="width: 45%"></div>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                            <li>
+                                <!-- drag handle -->
+                                <span class="handle">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </span>
+                                <!-- todo text -->
+                                <span class="text">Design a nice theme</span>
+                                <!-- Emphasis label -->
+                                @*<small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>*@
+                                <span class="badge badge-info"><span>65%</span><span class="ml-2">180/200</span></span>
+                                <a href="/OnePercentProgress/Home/ManageTask?id=01&projectId=01" class="text-info">
+                                    <i class="fas fa-edit ml-2"></i>
+                                </a>
+                                <a href="/OnePercentProgress/Home/Tasks/?id=01&projectId=01" class="text-info">
+                                    <i class="fas fa-tasks ml-2"></i>
+                                </a>
+                                <div class="progress-group mt-1">
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-info" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+<a href="/OnePercentProgress/Home/ManageTask?id=&projectId=01" class="float">
+    <i class="fa fa-plus my-float"></i>
+</a>

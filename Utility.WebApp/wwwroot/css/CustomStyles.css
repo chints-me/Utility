@@ -20,6 +20,6 @@ a.float:hover {
     margin-top: 22px;
 }
 
-.project-box {
+.project-box, .task-box {
     cursor: pointer;
 }

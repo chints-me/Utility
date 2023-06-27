@@ -5,7 +5,8 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Controllers
     [Area("OnePercentProgress")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        #region "Project"
+        public IActionResult Projects()
         {
             return View();
         }
@@ -19,5 +20,19 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Controllers
         {
             return View();
         }
+        #endregion
+
+        #region Tasks
+
+        public IActionResult Tasks(string id, string projectId)
+        {
+            return View();
+        }
+
+        public IActionResult ManageTask(string id, string projectId)
+        {
+            return View();
+        }
+        #endregion
     }
 }
