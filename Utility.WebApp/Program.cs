@@ -1,4 +1,8 @@
+using Utility.WebApp;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigurePersistanceService(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

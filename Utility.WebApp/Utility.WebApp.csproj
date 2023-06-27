@@ -11,17 +11,24 @@
     <Folder Include="Areas\OnePercentProgress\Models\" />
     <Folder Include="Components\" />
     <Folder Include="Data\" />
-    <Folder Include="EmailTemplate\" />
+    <Folder Include="EmailTemplates\" />
     <Folder Include="Enums\" />
     <Folder Include="Helpers\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Service\" />
-    <Folder Include="Repository\" />
+    <Folder Include="Services\" />
+    <Folder Include="Repositories\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
