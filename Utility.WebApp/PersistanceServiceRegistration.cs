@@ -20,9 +20,11 @@ namespace Utility.WebApp
             services.AddScoped<UnitOfWork>();
             services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<ProjectRepository>();
+            services.AddScoped<TaskRepository>();
 
             // Services
             services.AddScoped<ProjectService>();
+            services.AddScoped<TaskService>();
 
             return services;
         }

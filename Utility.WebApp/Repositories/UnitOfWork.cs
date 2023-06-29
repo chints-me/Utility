@@ -7,6 +7,7 @@ namespace Utility.WebApp.Repositories
         private readonly UtilityDbContext dbContext;
 
         private ProjectRepository projectRepository;
+        private TaskRepository taskRepository;
 
         public UnitOfWork(UtilityDbContext _dbContext)
         {
@@ -14,6 +15,7 @@ namespace Utility.WebApp.Repositories
         }
 
         public ProjectRepository ProjectRepository => projectRepository ??= new ProjectRepository(dbContext);
+        public TaskRepository TaskRepository => taskRepository ??= new TaskRepository(dbContext);
 
         public void Dispose()
         {
