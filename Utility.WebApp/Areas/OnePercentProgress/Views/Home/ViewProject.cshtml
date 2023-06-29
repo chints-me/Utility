@@ -1,4 +1,5 @@
-﻿<br />
+﻿@model ProjectViewModel
+<br />
 <!-- Main content -->
 <div class="content">
     <div class="container-fluid">
@@ -18,7 +19,7 @@
                     <form role="form" id="projectForm">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Project Title</label>
+                                <label>@Model.Name</label>
                             </div>
                             <div class="progress-group">
                                 <b>45%</b>
@@ -30,11 +31,11 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="/OnePercentProgress/Home/ManageProject/01" class="btn btn-primary">Edit</a>
+                            <a href="/OnePercentProgress/Home/ManageProject/?id=@Model.Id" class="btn btn-primary">Edit</a>
                             @*<a href="/OnePercentProgress/Home/PauseProject/01" class="btn btn-warning">Pause</a>
                                 <a href="/OnePercentProgress/Home/ResumeProject/01" class="btn btn-success">Resume</a>*@
                             <a href="/OnePercentProgress/Home/Projects" class="btn btn-secondary">Back to projects</a>
-                            <a href="/OnePercentProgress/Home/Tasks?id=01&projectId=01" class="btn btn-info">Tasks</a>
+                            <a href="/OnePercentProgress/Home/Tasks?projectId=@Model.Id" class="btn btn-info">Tasks</a>
                             @*<a href="/OnePercentProgress/Home/ArchiveProject/01" class="btn btn-danger">Archive</a>*@
                         </div>
                     </form>

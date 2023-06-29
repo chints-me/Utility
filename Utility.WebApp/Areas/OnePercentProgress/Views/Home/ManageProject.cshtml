@@ -1,4 +1,5 @@
-﻿<!-- Content Header (Page header) -->
+﻿@model ProjectViewModel
+<!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-1">
@@ -20,16 +21,21 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form role="form" id="projectForm">
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.AntiForgeryToken()
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="ProjectTitle">Project Title<span class="text-danger mr-2">*</span></label>
-                                <input type="text" name="ProjectTitle" class="form-control" id="ProjectTitle" placeholder="Enter title">
+                                <label for="@Html.NameFor(m => m.Name)">@Html.DisplayNameFor(m => m.Name)<span class="text-danger mr-2">*</span></label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder="Enter title", @autocomplete="off" })
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="/OnePercentProgress/Home/ViewProject?id=01" class="btn btn-secondary">Back to project</a>
+                            @if (!Model.Id.IsNullOrEmpty())
+                            {
+                                <a href="/OnePercentProgress/Home/ViewProject?id=@Model.Id" class="btn btn-secondary">Back to project</a>
+                            }
                         </div>
                     </form>
                 </div>
@@ -45,3 +51,53 @@
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+       $.validator.setDefaults({
+            submitHandler: function (form) {
+                debugger
+                var data = $("#projectForm").serialize();
+                var url = "/OnePercentProgress/Home/ManageProject";
+                console.log(data);
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    error: function(data) {
+                        Functions.HandleAjaxResponse(data);
+                    },
+                    success: function(data) {
+                        Functions.HandleAjaxResponse(data);
+                    },
+                });
+                return false;
+            }
+        });
+
+        $('#projectForm').validate({
+            rules: {
+                Name: {
+                    required: true,
+                },
+            },
+            messages: {
+                Name: {
+                    required: "Please enter a title",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+</script>
+}

@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Utility.WebApp.Areas.OnePercentProgress.Services;
+using Utility.WebApp.Repositories;
+using Utility.WebApp.Repositories.OnePercentProgress;
 
 namespace Utility.WebApp
 {
@@ -13,9 +16,13 @@ namespace Utility.WebApp
                     options.EnableSensitiveDataLogging();
                 });
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            // Repositories
+            services.AddScoped<UnitOfWork>();
+            services.AddScoped(typeof(GenericRepository<>));
+            services.AddScoped<OPP_ProjectRepository>();
+
+            // Services
+            services.AddScoped<OPP_ProjectService>();
 
             return services;
         }

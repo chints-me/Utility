@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+     <!-- Toastr -->
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="~/css/adminlte.css" asp-append-version="true">
     <!-- Google Font: Source Sans Pro -->
@@ -106,12 +110,22 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+
     <!-- AdminLTE App -->
     <script src="~/js/adminlte.js"></script>
-    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
-    @*@await RenderSectionAsync("Scripts", required: false)*@
+
+    <script src="~/js/CustomScripts.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 
     <script type="text/javascript">
         $(".project-box").click(function() {
