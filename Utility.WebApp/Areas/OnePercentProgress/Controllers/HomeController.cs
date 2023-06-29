@@ -11,9 +11,9 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Controllers
     [Area("OnePercentProgress")]
     public class HomeController : Controller
     {
-        private readonly OPP_ProjectService projectService;
+        private readonly ProjectService projectService;
 
-        public HomeController(OPP_ProjectService projectService)
+        public HomeController(ProjectService projectService)
         {
             this.projectService = projectService;
         }

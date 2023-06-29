@@ -6,14 +6,14 @@ namespace Utility.WebApp.Repositories
     {
         private readonly UtilityDbContext dbContext;
 
-        private OPP_ProjectRepository opp_ProjectRepository;
+        private ProjectRepository projectRepository;
 
         public UnitOfWork(UtilityDbContext _dbContext)
         {
             dbContext = _dbContext;
         }
 
-        public OPP_ProjectRepository OPP_ProjectRepository => opp_ProjectRepository ??= new OPP_ProjectRepository(dbContext);
+        public ProjectRepository ProjectRepository => projectRepository ??= new ProjectRepository(dbContext);
 
         public void Dispose()
         {

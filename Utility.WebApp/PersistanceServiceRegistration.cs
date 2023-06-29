@@ -19,10 +19,10 @@ namespace Utility.WebApp
             // Repositories
             services.AddScoped<UnitOfWork>();
             services.AddScoped(typeof(GenericRepository<>));
-            services.AddScoped<OPP_ProjectRepository>();
+            services.AddScoped<ProjectRepository>();
 
             // Services
-            services.AddScoped<OPP_ProjectService>();
+            services.AddScoped<ProjectService>();
 
             return services;
         }

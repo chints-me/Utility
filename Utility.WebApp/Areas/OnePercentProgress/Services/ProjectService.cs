@@ -5,11 +5,11 @@ using Utility.WebApp.Helpers;
 
 namespace Utility.WebApp.Areas.OnePercentProgress.Services
 {
-    public class OPP_ProjectService
+    public class ProjectService
     {
         private readonly UnitOfWork unitOfWork;
 
-        public OPP_ProjectService(UnitOfWork unitOfWork)
+        public ProjectService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -20,7 +20,7 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
 
             var item = new Domains.OnePercentProgress.OPP_Project();
             item.Name = viewModel.Name;
-            item = await unitOfWork.OPP_ProjectRepository.Add(item);
+            item = await unitOfWork.ProjectRepository.Add(item);
 
             await unitOfWork.Save();
 
@@ -33,9 +33,9 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
         {
             ResponseViewModel response = new ResponseViewModel();
 
-            var item = await unitOfWork.OPP_ProjectRepository.Get(W => W.Id == viewModel.Id);
+            var item = await unitOfWork.ProjectRepository.Get(W => W.Id == viewModel.Id);
             item.Name = viewModel.Name;
-            await unitOfWork.OPP_ProjectRepository.Update(item);
+            await unitOfWork.ProjectRepository.Update(item);
 
             await unitOfWork.Save();
 
@@ -48,7 +48,7 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
         {
             ProjectViewModel viewModel = new ProjectViewModel();
             Guid Id = id.TryParseGuidId();
-            var item = await unitOfWork.OPP_ProjectRepository.Get(W => W.Id == Id);
+            var item = await unitOfWork.ProjectRepository.Get(W => W.Id == Id);
             if (item != null)
             {
                 viewModel.Id = item.Id;
@@ -61,7 +61,7 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
         {
             List<ProjectViewModel> viewModel = new List<ProjectViewModel>();
 
-            var items = await unitOfWork.OPP_ProjectRepository.GetAll();
+            var items = await unitOfWork.ProjectRepository.GetAll();
             if (items != null && items.Count > 0)
             {
                 foreach (var item in items)
