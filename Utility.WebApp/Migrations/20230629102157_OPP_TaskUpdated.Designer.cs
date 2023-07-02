@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Utility.WebApp;
 
@@ -11,9 +12,11 @@ using Utility.WebApp;
 namespace Utility.WebApp.Migrations
 {
     [DbContext(typeof(UtilityDbContext))]
-    partial class UtilityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230629102157_OPP_TaskUpdated")]
+    partial class OPP_TaskUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,6 +56,9 @@ namespace Utility.WebApp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("OPP_ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Status")

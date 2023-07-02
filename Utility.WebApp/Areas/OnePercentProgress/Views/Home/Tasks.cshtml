@@ -1,4 +1,5 @@
-﻿<br />
+﻿@model TasksViewModel
+<br />
 <!-- Main content -->
 <div class="content">
     <div class="container-fluid">
@@ -14,10 +15,10 @@
                         </h3>
                         <div class="card-tools">
                             <div class="btn-group btn-group-sm">
-                                <a href="/OnePercentProgress/Home/ViewProject?id=01" class="btn btn-default btn-flat" title="Back to project">
+                                <a href="@Url.Action("ViewProject","Home", new { area = "OnePercentProgress", id= Model!.ProjectId})" class="btn btn-default btn-flat" title="Back to project">
                                     <i class="far fa-list-alt"></i>
                                 </a>
-                                <a href="/OnePercentProgress/Home/Tasks?id=01&projectId=01" class="btn btn-default btn-flat" title="Back to parent tasks">
+                                <a href="@Url.Action("Tasks", "Home", new { area = "OnePercentProgress", parentTaskId = Model!.GrandParentTaskId, projectId = Model!.ProjectId})" class="btn btn-default btn-flat" title="Back to parent tasks">
                                     <i class="fas fa-tasks"></i>
                                 </a>
                                 @*<button type="button" class="btn btn-default btn-flat">
@@ -29,54 +30,43 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <ul class="todo-list" data-widget="todo-list">
-                            <li class="done">
-                                <!-- drag handle -->
+                            @if (Model != null)
+                            {
+                                if (Model.Tasks != null && Model.Tasks.Count > 0)
+                                {
+                                    foreach (var item in Model.Tasks)
+                                    {
+                                        var cssClass = item.Status == TaskStatusEnum.Done.ToValue() ? "done" : "";
+                                        <li class="@cssClass">
+                                            <!-- drag handle -->
                                 <span class="handle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </span>
-                                <!-- todo text -->
-                                <span class="text">Design a nice theme</span>
-                                <!-- Emphasis label -->
-                                @*<small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>*@
-                                <span class="badge badge-info"><span>45%</span><span class="ml-2">160/200</span></span>
-                                <a href="/OnePercentProgress/Home/ManageTask?id=01&projectId=01" class="text-info">
-                                    <i class="fas fa-edit ml-2"></i>
-                                </a>
-                                <a href="/OnePercentProgress/Home/Tasks/?id=01&projectId=01" class="text-info">
-                                    <i class="fas fa-tasks ml-2"></i>
-                                </a>
-                                <div class="progress-group mt-1">
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-info" style="width: 45%"></div>
-                                    </div>
-                                </div>
+                                                <i class="fas fa-ellipsis-v"></i>
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </span>
+                                            <!-- todo text -->
+                                <span class="text">@item.Name</span>
+                                            <!-- Emphasis label -->
+                                            @*<small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>*@
+                                            <span class="badge badge-info"><span>@item.CompletionPercentage%</span><span class="ml-2">@item.TotalTasksDone/@item.TotalTasks</span></span>
+                                            <a href="@Url.Action("ManageTask", "Home", new { area = "OnePercentProgress", id = item.Id, parentTaskId = item.ParentTaskId, projectId = item.ProjectId})" class="text-info">
+                                                <i class="fas fa-edit ml-2"></i>
+                                            </a>
+                                            <a href="@Url.Action("Tasks", "Home", new { area = "OnePercentProgress", parentTaskId = item.Id, projectId = item.ProjectId })" class="text-info">
+                                                <i class="fas fa-tasks ml-2"></i>
+                                            </a>
+                                            <div class="progress-group mt-1">
+                                                <div class="progress progress-sm">
+                                                    <div class="progress-bar bg-info" style="width: @item.CompletionPercentage%"></div>
+                                                </div>
+                                            </div>
 
-                            </li>
+                                        </li>
 
-                            <li>
-                                <!-- drag handle -->
-                                <span class="handle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </span>
-                                <!-- todo text -->
-                                <span class="text">Design a nice theme</span>
-                                <!-- Emphasis label -->
-                                @*<small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>*@
-                                <span class="badge badge-info"><span>65%</span><span class="ml-2">180/200</span></span>
-                                <a href="/OnePercentProgress/Home/ManageTask?id=01&projectId=01" class="text-info">
-                                    <i class="fas fa-edit ml-2"></i>
-                                </a>
-                                <a href="/OnePercentProgress/Home/Tasks/?id=01&projectId=01" class="text-info">
-                                    <i class="fas fa-tasks ml-2"></i>
-                                </a>
-                                <div class="progress-group mt-1">
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-info" style="width: 65%"></div>
-                                    </div>
-                                </div>
-                            </li>
+                                    }
+                                }
+
+                            }
+
 
                         </ul>
                     </div>
@@ -95,6 +85,6 @@
 </div>
 <!-- /.content -->
 
-<a href="/OnePercentProgress/Home/ManageTask?id=&projectId=01" class="float">
+<a href="@Url.Action("ManageTask", "Home", new { area = "OnePercentProgress", id = Model!.TaskId, parentTaskId =  Model!.ParentTaskId, projectId= Model!.ProjectId})" class="float">
     <i class="fa fa-plus my-float"></i>
 </a>

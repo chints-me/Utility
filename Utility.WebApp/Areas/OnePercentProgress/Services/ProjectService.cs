@@ -2,6 +2,7 @@
 using Utility.WebApp.Models;
 using Utility.WebApp.Repositories;
 using Utility.WebApp.Helpers;
+using Utility.WebApp.Enums;
 
 namespace Utility.WebApp.Areas.OnePercentProgress.Services
 {
@@ -44,17 +45,32 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
             return response;
         }
 
-        public async Task<ProjectViewModel> Get(string id)
+        public async Task<ProjectViewModel?> Get(string id)
         {
-            ProjectViewModel viewModel = new ProjectViewModel();
             Guid Id = id.TryParseGuidId();
             var item = await unitOfWork.ProjectRepository.Get(W => W.Id == Id);
             if (item != null)
             {
+                ProjectViewModel viewModel = new ProjectViewModel();
                 viewModel.Id = item.Id;
                 viewModel.Name = item.Name;
+
+                GetProjectCompletionStats(item.Id, out int totalTasks, out int totalTasksDone, out int completionPercentage);
+                viewModel.TotalTasks = totalTasks;
+                viewModel.TotalTasksDone = totalTasksDone;
+                viewModel.CompletionPercentage = completionPercentage;
+
+                return viewModel;
             }
-            return viewModel;
+            return null;
+        }
+
+        private void GetProjectCompletionStats(Guid projectId, out int totalTasks, out int totalTasksDone, out int completionPercentage)
+        {
+            var tasks = unitOfWork.TaskRepository.GetAll(W => W.OPP_ProjectId == projectId && W.OPP_ParentTaskId == Guid.Empty).Result;
+            totalTasks = tasks.Count();
+            totalTasksDone = tasks.Where(W => W.Status == TaskStatusEnum.Done.ToValue()).Count();
+            completionPercentage = totalTasks > 0 ? (int)(((double)totalTasksDone / totalTasks) * 100) : 0;
         }
 
         public async Task<List<ProjectViewModel>> GetAll()
@@ -66,7 +82,15 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
             {
                 foreach (var item in items)
                 {
-                    viewModel.Add(new ProjectViewModel() { Id = item.Id, Name = item.Name });
+                    GetProjectCompletionStats(item.Id, out int totalTasks, out int totalTasksDone, out int completionPercentage);
+                    viewModel.Add(new ProjectViewModel()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        TotalTasks = totalTasks,
+                        TotalTasksDone = totalTasksDone,
+                        CompletionPercentage = completionPercentage,
+                    });
                 }
             }
             return viewModel;

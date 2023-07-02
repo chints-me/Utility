@@ -22,10 +22,10 @@
                                 <label>@Model.Name</label>
                             </div>
                             <div class="progress-group">
-                                <b>45%</b>
-                                <span class="float-right">160/200</span>
+                                <b>@Model.CompletionPercentage%</b>
+                                <span class="float-right">@Model.TotalTasksDone/@Model.TotalTasks</span>
                                 <div class="progress progress-sm">
-                                    <div class="progress-bar bg-info" style="width: 45%"></div>
+                                    <div class="progress-bar bg-info" style="width: @Model.CompletionPercentage%"></div>
                                 </div>
                             </div>
                         </div>

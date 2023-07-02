@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Utility.WebApp;
 
@@ -11,9 +12,11 @@ using Utility.WebApp;
 namespace Utility.WebApp.Migrations
 {
     [DbContext(typeof(UtilityDbContext))]
-    partial class UtilityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230629102600_OPP_TaskUpdated_2")]
+    partial class OPP_TaskUpdated_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

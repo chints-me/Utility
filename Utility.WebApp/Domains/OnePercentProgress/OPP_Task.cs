@@ -13,7 +13,10 @@ namespace Utility.WebApp.Domains.OnePercentProgress
         public Guid OPP_ParentTaskId { get; set; }
 
         [Required]
-        public Guid ProjectId { get; set; }
+        public Guid OPP_ProjectId { get; set; }
         public OPP_Project OPP_Project { get; set; }
+
+        [Required]
+        public string Status { get; set; }
     }
 }

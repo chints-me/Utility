@@ -8,7 +8,10 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Models
 
         [Required]
         [MaxLength(100)]
-        [Display(Name="Project Title")]
+        [Display(Name = "Project Title")]
         public string Name { get; set; }
+        public int TotalTasks { get; set; }
+        public int TotalTasksDone { get; set; }
+        public int CompletionPercentage { get; set; }
     }
 }

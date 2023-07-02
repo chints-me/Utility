@@ -1,4 +1,5 @@
-﻿<!-- Content Header (Page header) -->
+﻿@model TaskViewModel
+<!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-1">
@@ -20,16 +21,24 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form role="form" id="taskForm">
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.ProjectId)
+                        @Html.HiddenFor(m => m.ParentTaskId)
+                        @Html.AntiForgeryToken()
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="TaskTitle">Task Title<span class="text-danger mr-2">*</span></label>
-                                <input type="text" name="TaskTitle" class="form-control" id="TaskTitle" placeholder="Enter title">
+                                <label for="@Html.NameFor(m => m.Name)">@Html.DisplayNameFor(m => m.Name)<span class="text-danger mr-2">*</span></label>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder="Enter title", @autocomplete="off" })
+                            </div>
+                            <div class="form-group">
+                                <label for="@Html.NameFor(m => m.Status)">@Html.DisplayNameFor(m => m.Status)<span class="text-danger mr-2">*</span></label>
+                                @Html.DropDownListFor(m => m.Status, Model.StatusList, "Update Status", new { @class = "form-control" })
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="/OnePercentProgress/Home/Tasks?id=01&projectId=01" class="btn btn-secondary">Back to tasks</a>
+                            <a href="@Url.Action("Tasks", "Home", new { area = "OnePercentProgress", parentTaskId = Model.ParentTaskId, projectId = Model.ProjectId })" class="btn btn-secondary">Back to tasks</a>
                         </div>
                     </form>
                 </div>
@@ -45,3 +54,59 @@
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
+@section Scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+       $.validator.setDefaults({
+            submitHandler: function (form) {
+                debugger
+                var data = $("#taskForm").serialize();
+                var url = "/OnePercentProgress/Home/ManageTask";
+                console.log(data);
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    error: function(data) {
+                        Functions.HandleAjaxResponse(data);
+                    },
+                    success: function(data) {
+                        Functions.HandleAjaxResponse(data);
+                    },
+                });
+                return false;
+            }
+        });
+
+        $('#taskForm').validate({
+            rules: {
+                Name: {
+                    required: true,
+                },
+                Status: {
+                    required: true,
+                },
+            },
+            messages: {
+                Name: {
+                    required: "Please enter a title",
+                },
+                Status: {
+                    required: "Please update a status",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+</script>
+}

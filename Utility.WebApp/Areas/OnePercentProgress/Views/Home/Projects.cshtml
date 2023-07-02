@@ -27,10 +27,10 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">@item.Name</span>
                                 <div class="progress-group">
-                                    <b>45%</b>
-                                    <span class="float-right">160/200</span>
+                                    <b>@item.CompletionPercentage%</b>
+                                    <span class="float-right">@item.TotalTasksDone/@item.TotalTasks</span>
                                     <div class="progress progress-sm">
-                                        <div class="progress-bar bg-danger" style="width: 45%"></div>
+                                        <div class="progress-bar bg-danger" style="width: @item.CompletionPercentage%"></div>
                                     </div>
                                 </div>
                                 <a href="/OnePercentProgress/Home/ViewProject/?id=@item.Id" style="display:none"></a>

@@ -7,5 +7,6 @@
         public string? ValidationErrors { get; set; }
         public string? RedirectUrl { get; set; }
         public bool IsRedirectionRequired { get; set; }
+        public string? Data { get; set; }
     }
 }
