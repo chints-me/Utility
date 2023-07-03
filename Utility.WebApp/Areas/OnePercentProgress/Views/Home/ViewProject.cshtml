@@ -31,11 +31,11 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="/OnePercentProgress/Home/ManageProject/?id=@Model.Id" class="btn btn-primary">Edit</a>
+                            <a href="@Url.Action("ManageProject","Home", new { area = "OnePercentProgress", id = Model.Id })" class="btn btn-primary">Edit</a>
                             @*<a href="/OnePercentProgress/Home/PauseProject/01" class="btn btn-warning">Pause</a>
                                 <a href="/OnePercentProgress/Home/ResumeProject/01" class="btn btn-success">Resume</a>*@
-                            <a href="/OnePercentProgress/Home/Projects" class="btn btn-secondary">Back to projects</a>
-                            <a href="/OnePercentProgress/Home/Tasks?projectId=@Model.Id" class="btn btn-info">Tasks</a>
+                            <a href="@Url.Action("Projects","Home", new { area = "OnePercentProgress" })" class="btn btn-secondary">Back to projects</a>
+                            <a href="@Url.Action("Tasks","Home", new { area = "OnePercentProgress", projectId = Model.Id })" class="btn btn-info">Tasks</a>
                             @*<a href="/OnePercentProgress/Home/ArchiveProject/01" class="btn btn-danger">Archive</a>*@
                         </div>
                     </form>

@@ -61,7 +61,7 @@
             submitHandler: function (form) {
                 debugger
                 var data = $("#taskForm").serialize();
-                var url = "/OnePercentProgress/Home/ManageTask";
+                var url = "@Url.Action("ManageTask","Home", new { area = "OnePercentProgress" })";
                 console.log(data);
                 $.ajax({
                     type: 'POST',
