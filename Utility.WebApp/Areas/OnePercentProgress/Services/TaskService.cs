@@ -69,7 +69,7 @@ namespace Utility.WebApp.Areas.OnePercentProgress.Services
                 parentTask.Status = TaskStatusEnum.InProgress.ToValue();
                 await unitOfWork.TaskRepository.Update(parentTask);
 
-                await MakeParentTaskInProgress(parentTask.Id);
+                await MakeParentTaskInProgress(parentTask.OPP_ParentTaskId);
             }
         }
 
